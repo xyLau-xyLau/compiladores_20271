@@ -81,7 +81,7 @@ LALR_TABLE = {
 
 def parse_lalr1(tokens):
     """
-    Ejecuta el ciclo shift/reduce consultando la matriz unificada LALR_TABLE.
+    Ejecuta el ciclo shift/reduce
     """
     input_tokens = list(tokens)
     if not input_tokens or input_tokens[-1] != '$':
@@ -95,7 +95,7 @@ def parse_lalr1(tokens):
         current_state = state_stack[-1]
         current_token = input_tokens[ip]
 
-        # Consulta unificada en la matriz de parseo para el token de entrada
+        
         if current_token not in LALR_TABLE.get(current_state, {}):
             return False, f"Error sintáctico: Token no esperado '{current_token}' en el estado {current_state}.", None
 
@@ -123,7 +123,7 @@ def parse_lalr1(tokens):
             parent_node = Node(lhs, children)
             top_state = state_stack[-1]
 
-            # Consulta del valor GOTO en la misma matriz unificada usando el No Terminal
+            # Consulta del valor GOTO  usando el No Terminal
             if lhs not in LALR_TABLE.get(top_state, {}):
                 return False, f"Error en GOTO: Sin transición para no terminal '{lhs}' en el estado {top_state}.", None
 
